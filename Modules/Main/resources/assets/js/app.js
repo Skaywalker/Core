@@ -1,0 +1,1 @@
+console.log('Nvdidart assets loaded!')
