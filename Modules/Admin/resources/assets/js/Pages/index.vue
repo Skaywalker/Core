@@ -1,9 +1,20 @@
 <script lang="ts">
-console.log('Admin page');
+import {defineComponent} from "vue";
+import AdminLayout from "@AdminModule/Layouts/AdminLayout.vue";
+
+export default defineComponent({
+  components: {AdminLayout}
+})
+
+
+
 </script>
 
 <template>
-<h1>In Admin page</h1>
+ <admin-layout>
+      <h1>Guest Page</h1>
+ </admin-layout>
+
 </template>
 
 <style scoped>

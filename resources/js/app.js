@@ -1,4 +1,4 @@
-import './bootstrap';
+import '@/bootstrap';
 import '../../Modules/Main/resources/assets/js/app.js';
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3';

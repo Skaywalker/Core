@@ -5,6 +5,7 @@ namespace Modules\Admin\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
+
 class AdminServiceProvider extends ServiceProvider
 {
     protected string $moduleName = 'Admin';

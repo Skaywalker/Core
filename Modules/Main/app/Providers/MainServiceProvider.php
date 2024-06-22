@@ -3,9 +3,15 @@
 namespace Modules\Main\Providers;
 
 use App\Http\Middleware\HandleAdminInertiaRequests;
+use http\Params;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Testing\TestResponse;
+use Illuminate\View\FileViewFinder;
+use LogicException;
 use Modules\Admin\Providers\AdminServiceProvider;
+use Modules\Main\Testing\TestResponseModularMacros;
+use Illuminate\Foundation\Testing\TestResponse as LegacyTestResponse;
 use Modules\Website\Providers\WebsiteServiceProvider;
 
 class MainServiceProvider extends ServiceProvider
@@ -25,6 +31,8 @@ class MainServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'database/migrations'));
+        $this->registerTestingMacros();
+
     }
 
     /**
@@ -34,6 +42,17 @@ class MainServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+        $this->app->bind('inertia.testing.module-view-finder',
+            function ($app,$params=null){
+                $moduleName = $params['moduleName'] ?? null;
+
+                return new FileViewFinder(
+                    $app['files'],
+                    [module_path($moduleName, config('modules.paths.source'))],
+                    $app['config']->get('main.inertiaModules.testing.page_extensions')
+                );
+            }
+        );
     }
 
     /**
@@ -77,6 +96,28 @@ class MainServiceProvider extends ServiceProvider
     protected function registerConfig(): void
     {
         $this->publishes([module_path($this->moduleName, 'config/config.php') => config_path($this->moduleNameLower.'.php')], 'config');
+
+        $configPath = module_path($this->moduleName, 'config');
+
+        // Get all the files in the config directory
+        $files = glob($configPath . '/*.php');
+
+        foreach ($files as $file) {
+            // Get the base name of the file
+            $fileName = basename($file, '.php');
+
+            // Define the key for the config file
+            $configKey = $this->moduleNameLower . '.' . $fileName;
+
+            // Define the path for the published config file
+            $publishPath = config_path($configKey . '.php');
+
+            // Publish the config file
+            $this->publishes([$file => $publishPath], 'config');
+
+            // Merge the config file
+            $this->mergeConfigFrom($file, $configKey);
+            }
         $this->mergeConfigFrom(module_path($this->moduleName, 'config/config.php'), $this->moduleNameLower);
     }
 
@@ -122,5 +163,12 @@ class MainServiceProvider extends ServiceProvider
         }
 
         return $paths;
+    }
+    protected function registerTestingMacros(): void
+    {
+        if (class_exists(TestResponse::class)){
+                     TestResponse::mixin(new TestResponseModularMacros());
+         return;
+        }
     }
 }
