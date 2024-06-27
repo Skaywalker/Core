@@ -1,10 +1,4 @@
-<script setup lang="ts">
-import {Head} from "@inertiajs/vue3";
-defineProps({
-  title: String,
-});
 
-</script>
 
 <template>
   <Head :title="title" />
@@ -17,6 +11,14 @@ defineProps({
     </v-main>
   </v-layout>
 </template>
+<script lang="ts">
+export default {
+  props: {
+    title: String
+  }
+}
+</script>
+
 
 <style lang="scss">
 

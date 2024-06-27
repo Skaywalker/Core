@@ -30,4 +30,3 @@ namespace Illuminate\Foundation\Testing {
     }
 }
 
-// ... a többi kód ...

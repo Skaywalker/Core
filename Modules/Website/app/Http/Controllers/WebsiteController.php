@@ -15,7 +15,7 @@ class WebsiteController extends Controller
      */
     public function index()
     {
-       return Inertia::module('website::page.vue');
+       return Inertia::module('Website::home');
 
         return view('website::index');
     }

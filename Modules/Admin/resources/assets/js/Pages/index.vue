@@ -1,21 +1,28 @@
-<script lang="ts">
+
+<template>
+ <AdminLayout title="mama">
+      <h1>admin Page</h1>
+ </AdminLayout>
+
+</template>
+<script>
 import {defineComponent} from "vue";
 import AdminLayout from "@AdminModule/Layouts/AdminLayout.vue";
 
 export default defineComponent({
-  components: {AdminLayout}
+    components: {
+        AdminLayout
+    },
+    setup() {
+        return {
+            title: "Admin Page"
+        }
+    }
 })
 
 
 
 </script>
-
-<template>
- <admin-layout>
-      <h1>Guest Page</h1>
- </admin-layout>
-
-</template>
 
 <style scoped>
 

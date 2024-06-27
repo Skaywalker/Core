@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Admin\Http\Controllers\AdminController;
 use Modules\Teszt\Http\Controllers\TesztController;
 
 /*
@@ -15,5 +16,5 @@ use Modules\Teszt\Http\Controllers\TesztController;
 */
 
 Route::group([], function () {
-    Route::resource('teszt', TesztController::class)->names('teszt');
+    Route::resource('admin', AdminController::class)->names('admin');
 });

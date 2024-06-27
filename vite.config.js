@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import path, {resolve} from "path";
+
 // @ts-ignore
 import collectModuleAssetsPaths from "./vite-module-loader.js";
 
@@ -9,14 +10,9 @@ import collectModuleAssetsPaths from "./vite-module-loader.js";
 import path from 'path';*/
 
 const host = 'core.test';
-console.log(path.resolve(__dirname + '/Modules'),'modules path')
 async function getConfig() {
-    const paths = [
-        'resources/css/app.css',
-        'resources/js/app.js',
-    ];
+    const paths = [];
     const allPaths = await collectModuleAssetsPaths(paths, 'Modules');
-    console.log(allPaths);
     return defineConfig({
         server:{
             host,
@@ -24,6 +20,12 @@ async function getConfig() {
 
         },
         plugins: [
+
+            laravel({
+                input: allPaths,
+                // ssr: 'resources/js/ssr.js',
+                refresh: true,
+            }),
             vue({
                 template: {
                     transformAssetUrls: {
@@ -32,19 +34,20 @@ async function getConfig() {
                     },
                 },
             }),
-            laravel({
-                input: allPaths,
-                ssr: 'resources/js/ssr.js',
-                refresh: true,
-            })
         ],
+        build:{
+            outDir: 'public/build',
+            rollupOptions:{
+                input: allPaths,
+            },
+        },
         resolve:{
             alias:{
                 '@modules' : path.resolve('Modules'),
-                '@AdminModule': resolve(__dirname, 'Modules/Admin/resources/assets/js'),
-                '@WebsiteModule': resolve(__dirname, 'Modules/Admin/resources/assets/js'),
+                '@AdminModule': path.resolve(__dirname, 'Modules/Admin/resources/assets/js'),
+                '@WebsiteModule':path.resolve(__dirname, 'Modules/Admin/resources/assets/js'),
             },
-        }
+        },
     });
 }
 export default getConfig();

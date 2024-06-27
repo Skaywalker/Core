@@ -2,8 +2,5 @@
     "Main": true,
     "Website": true,
     "Admin": true,
-    "Teszt": true,
-    "Teszt2": true,
-    "Test": true,
-    "Test2": true
+    "User": true
 }
