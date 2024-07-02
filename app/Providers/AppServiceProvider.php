@@ -11,7 +11,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->register(\Modules\Main\Providers\MainServiceProvider::class);
+        $this->app->register(\Modules\Main\Providers\ModulesInertiaServiceProvider::class);
     }
 
     /**

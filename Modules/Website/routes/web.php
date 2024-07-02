@@ -17,3 +17,8 @@ use Modules\Website\Http\Controllers\WebsiteController;
 Route::group([], function () {
     Route::resource('website', WebsiteController::class)->names('website');
 });
+Route::get('/lang/{locale?}',function ($locale){
+    app()->setLocale($locale);
+    session()->put('locale',$locale);
+    return redirect()->back();
+})->name('locale');

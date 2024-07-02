@@ -3,7 +3,6 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import path, {resolve} from "path";
 
-// @ts-ignore
 import collectModuleAssetsPaths from "./vite-module-loader.js";
 
 /*import glob from 'glob';
@@ -20,12 +19,6 @@ async function getConfig() {
 
         },
         plugins: [
-
-            laravel({
-                input: allPaths,
-                // ssr: 'resources/js/ssr.js',
-                refresh: true,
-            }),
             vue({
                 template: {
                     transformAssetUrls: {
@@ -34,6 +27,12 @@ async function getConfig() {
                     },
                 },
             }),
+            laravel({
+                input: allPaths,
+                // ssr: 'resources/js/ssr.js',
+                refresh: true,
+            }),
+
         ],
         build:{
             outDir: 'public/build',

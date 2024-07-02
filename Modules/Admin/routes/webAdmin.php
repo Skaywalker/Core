@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Admin\Http\Controllers\AdminController;
-use Modules\Teszt\Http\Controllers\TesztController;
+use Modules\Admin\app\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +13,7 @@ use Modules\Teszt\Http\Controllers\TesztController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::group([], function () {
-    Route::resource('admin', AdminController::class)->names('admin');
+Route::get('admin',[AdminController::class,'index'])->name('admin.index');
+Route::get('admin2',function (){
+    return 'Admin 2';
 });

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', session()->get('locale')?? app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -23,4 +23,6 @@
 
 <body>
 @inertia
+@dd(app()->getLocale(), )
+
 </body>

@@ -10,7 +10,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "types": ["vue", "vuetify","node"],
+    "types": ["vue", "vuetify","node","vite/client"],
     "skipLibCheck": true,
     "paths": {
       "@/*": ["./resources/js/*"],
@@ -27,4 +27,12 @@
     "./resources/js/**/*.d.ts",
     "./resources/js/**/*.vue"
   ],
+  "exclude": [
+    "Modules/**/Resources/assets/js/**/*.ts",
+    "Modules/**/Resources/assets/js/**/*.d.ts",
+    "Modules/**/Resources/assets/js/**/*.vue",
+    "./resources/js/**/*.ts",
+    "./resources/js/**/*.d.ts",
+    "./resources/js/**/*.vue"
+  ]
 }

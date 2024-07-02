@@ -1,28 +1,14 @@
+<script setup lang="ts">
+import { Link } from '@inertiajs/vue3';
+</script>
 
 <template>
- <AdminLayout title="mama">
-      <h1>admin Page</h1>
- </AdminLayout>
-
+<h1>admin</h1>
+  <Link href="/lang/en">english</Link> <br>
+  <Link href="/lang/hu">Hungary</Link> <br>
+  <a href="/lang/en">english</a> <br>
+  <a href="/lang/hu">Hungary</a>
 </template>
-<script>
-import {defineComponent} from "vue";
-import AdminLayout from "@AdminModule/Layouts/AdminLayout.vue";
-
-export default defineComponent({
-    components: {
-        AdminLayout
-    },
-    setup() {
-        return {
-            title: "Admin Page"
-        }
-    }
-})
-
-
-
-</script>
 
 <style scoped>
 
