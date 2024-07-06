@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
+
+// @ts-ignore
 import path, {resolve} from "path";
 
 import collectModuleAssetsPaths from "./vite-module-loader.js";
@@ -18,7 +20,14 @@ async function getConfig() {
             hmr: { host }
 
         },
+
         plugins: [
+
+            laravel({
+                input: allPaths,
+                // ssr: 'resources/js/ssr.js',
+                refresh: true,
+            }),
             vue({
                 template: {
                     transformAssetUrls: {
@@ -27,23 +36,25 @@ async function getConfig() {
                     },
                 },
             }),
-            laravel({
-                input: allPaths,
-                // ssr: 'resources/js/ssr.js',
-                refresh: true,
-            }),
 
         ],
         build:{
             outDir: 'public/build',
+            emptyOutDir: true,
             rollupOptions:{
                 input: allPaths,
             },
+            sourcemap: true,
         },
+
         resolve:{
             alias:{
                 '@modules' : path.resolve('Modules'),
+                // @ts-ignore
+
                 '@AdminModule': path.resolve(__dirname, 'Modules/Admin/resources/assets/js'),
+                // @ts-ignore
+
                 '@WebsiteModule':path.resolve(__dirname, 'Modules/Admin/resources/assets/js'),
             },
         },

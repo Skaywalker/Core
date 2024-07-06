@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Translation\Translator;
 use Inertia\Inertia;
 
@@ -16,7 +17,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return Inertia::module('Admin::index');
+        Redis::set('kuka', 'redis test');
+        $value = Redis::get('kuka');
+        return Inertia::module('Admin::index', ['value' => $value]);
     }
 
     /**

@@ -1,5 +1,5 @@
 // import './bootstrap';
-import { createApp, h,DefineComponent} from 'vue'
+import { createApp, h} from 'vue'
 import {createInertiaApp} from '@inertiajs/vue3';
 import {resolvePageComponent} from "laravel-vite-plugin/inertia-helpers";
 
@@ -17,28 +17,30 @@ const vuetify = createVuetify({
 })
 
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+//@ts-ignore
+const appName = 'Laravel' || import.meta.env.VITE_APP_NAME;
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
-    resolve: async (name): Promise<any> => {
-        let parts: string[] = name.split('::')
-        let type: boolean = false
+    resolve: async (name) => {
+        let parts = name.split('::')
+        let type = false
         if (parts.length > 1) {
             type = !!parts[0]
         }
         if (type && parts[0] !== 'Website') {
-            return await resolvePageComponent(`../../../../${parts[0]}/${parts[1]}.vue`, import.meta.glob<DefineComponent>([
+            return await resolvePageComponent(`../../../../${parts[0]}/${parts[1]}.vue`, import.meta.glob([
                 `../../../../**/resources/assets/js/Pages/*.vue`,
             ]));
         } else {
-            let page: string[] = parts[1].split('js')
-            return await resolvePageComponent(`.${page[1]}.vue`, import.meta.glob<DefineComponent>([
+
+            let page = parts[1].split('js')
+            return await resolvePageComponent(`.${page[1]}.vue`, import.meta.glob([
                 `../../../../**/resources/assets/js/Pages/*.vue`,]));
         }
 
     },
-    setup: function ({el, App, props, plugin}): any {
+    setup: function ({el, App, props, plugin}) {
         return createApp({render: () => h(App, props)})
             .use(plugin)
             .use(vuetify)
@@ -49,4 +51,4 @@ createInertiaApp({
         color: '#4B5563',
     },
 
-}).then(r =>{})
+})
