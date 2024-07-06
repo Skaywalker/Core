@@ -12,9 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
 /*        $middleware->web([\App\Http\Middleware\HandleAdminInertiaRequests::class]);*/
-
+        $middleware->append([\Modules\Main\Http\Middleware\Localization::class]);
         $middleware->web( [\App\Http\Middleware\HandleInertiaRequests::class,
-            \Modules\Main\Http\Middleware\Localization::class]);
+            ]);
+
 
     })
     ->withExceptions(function (Exceptions $exceptions) {

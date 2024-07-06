@@ -17,10 +17,8 @@ class Trans extends Component
      */
     public function render(): View|string
     {
-        $locale = app()->getLocale();
+        $locale = session('locale') ?? app()->getLocale();
         $cacheKey = "translations.{$locale}";
-        $trans=$this->getTranslations($locale);
-
         // Attempt to retrieve the translations from Redis
         $cachedTranslations = Redis::get($cacheKey);
         if ($cachedTranslations) {
