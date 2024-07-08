@@ -2,7 +2,7 @@
 import { createApp, h} from 'vue'
 import {createInertiaApp} from '@inertiajs/vue3';
 import {resolvePageComponent} from "laravel-vite-plugin/inertia-helpers";
-
+import Trans from './Plugins/Translations';
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
@@ -44,7 +44,9 @@ createInertiaApp({
         return createApp({render: () => h(App, props)})
             .use(plugin)
             .use(vuetify)
-            .mount(el);
+            .use(Trans)
+            .mount(el)
+
 
     },
     progress: {

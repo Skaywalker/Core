@@ -18,7 +18,13 @@ Route::group([], function () {
     Route::resource('website', WebsiteController::class)->names('website');
 });
 Route::get('/lang/{locale?}',function ($locale){
+    if (!in_array($locale,config('app.available_languages'))){
+        session()->forget('lang');
+        return redirect()->back();
+    }
     app()->setLocale($locale);
-    session()->put('locale',$locale);
+    session()->put('lang',$locale);
     return redirect()->back();
 })->name('locale');
+
+Route::get('/', [WebsiteController::class,'index'])->name('website-some-page');

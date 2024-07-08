@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', session()->get('locale')?? app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', session('lang')?? app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">

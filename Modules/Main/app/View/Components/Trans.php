@@ -4,6 +4,7 @@ namespace Modules\Main\View\Components;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Translation\Translator;
 use Illuminate\View\Component;
@@ -17,18 +18,17 @@ class Trans extends Component
      */
     public function render(): View|string
     {
-        $locale = session('locale') ?? app()->getLocale();
+        $locale = session('lang')&&in_array(session('lang'),config('app.available_languages')) ?session('lang'): app()->getLocale();
         $cacheKey = "translations.{$locale}";
-        // Attempt to retrieve the translations from Redis
         $cachedTranslations = Redis::get($cacheKey);
         if ($cachedTranslations) {
+
             return view('main::components.trans', ['trans' => json_decode($cachedTranslations, true)]);
         }
         $trans=$this->getTranslations($locale);
         Redis::set($cacheKey, json_encode($trans, JSON_UNESCAPED_UNICODE));
         // Optionally, set an expiration time for the cache
-        Redis::expire($cacheKey, 3600);
-
+        Redis::expire($cacheKey, 60 * 60 * 24);
         return view('main::components.trans', ['trans' => $trans]);
     }
     private function getTranslations(string $locale): array
