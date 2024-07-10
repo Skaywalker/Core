@@ -4,8 +4,6 @@ namespace Modules\User\app\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Modules\User\Providers\EventServiceProvider;
-use Modules\User\Providers\RouteServiceProvider;
 
 class UserServiceProvider extends ServiceProvider
 {

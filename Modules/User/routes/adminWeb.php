@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use Modules\User\Http\Controllers\UserController;
 
 /*
@@ -16,15 +14,6 @@ use Modules\User\Http\Controllers\UserController;
 |
 */
 
-//Route::group([], function () {
-//    Route::resource('user', UserController::class)->names('user');
-//});
-//Route::get('/', function () {
-//    dd('mama');
-//    return Inertia::module('Welcome', [
-//        'canLogin' => Route::has('login'),
-//        'canRegister' => Route::has('register'),
-//        'laravelVersion' => Application::VERSION,
-//        'phpVersion' => PHP_VERSION,
-//    ]);
-//});
+Route::group([], function () {
+    Route::resource('user', UserController::class)->names('user');
+});

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Inertia\Inertia;
 
 class UserController extends Controller
 {
@@ -15,9 +14,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        dd('mama');
-        return Inertia::module('User::profile');
-
         return view('user::index');
     }
 

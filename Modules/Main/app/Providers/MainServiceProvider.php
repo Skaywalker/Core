@@ -2,8 +2,6 @@
 
 namespace Modules\Main\Providers;
 
-use App\Http\Middleware\HandleAdminInertiaRequests;
-use http\Params;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Testing\TestResponse;
@@ -12,7 +10,7 @@ use LogicException;
 use Modules\Admin\Providers\AdminServiceProvider;
 use Modules\Main\Testing\TestResponseModularMacros;
 use Illuminate\Foundation\Testing\TestResponse as LegacyTestResponse;
-use Modules\User\App\Providers\UserServiceProvider;
+use Modules\User\app\Providers\UserServiceProvider;
 use Modules\Website\Providers\WebsiteServiceProvider;
 
 class MainServiceProvider extends ServiceProvider

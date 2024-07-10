@@ -14,7 +14,6 @@ use Modules\User\Http\Controllers\UserController;
 |
 */
 
-//Route::group([], function () {
-//    Route::resource('user', UserController::class)->names('user');
-//});
-Route::get('mama', [UserController::class, 'index']);
+Route::group([], function () {
+    Route::resource('user', UserController::class)->names('user');
+});

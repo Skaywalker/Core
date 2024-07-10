@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\User\Providers;
+namespace Modules\User\app\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -35,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes(): void
     {
         Route::middleware('web')->group(module_path('User', '/routes/web.php'));
-//        Route::middleware('web')->prefix('admin')->group(module_path('User', '$adminWeb_ROUTE_PATH$'));
+        Route::middleware(['web',HandleAdminRoutesInertiaRequests::class])->prefix('admin')->name('adminWeb.')->group(module_path('Admin', '/routes/webAdmin.php'));
     }
 
     /**
@@ -46,6 +46,6 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes(): void
     {
         Route::middleware('api')->prefix('api')->name('api.')->group(module_path('User', '/routes/api.php'));
-//        Route::middleware('api')->prefix('admin')->prefix('api')->name('admin.api.')->group(module_path('User', '$adminApi_ROUTE_PATH$'));
+        Route::middleware('api')->prefix('adminApi')->name('adminApi.')->group(module_path('Admin', '/routes/apiAdmin.php'));
     }
 }
