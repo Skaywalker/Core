@@ -1,6 +1,6 @@
 <?php
 
-use Modules\Main\Providers\ModulesInertiaServiceProvider;
-
 return [
-\App\Providers\AppServiceProvider::class    ];
+    App\Providers\AppServiceProvider::class,
+    \Modules\User\app\Providers\FortifyServiceProvider::class,
+];
