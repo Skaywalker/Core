@@ -13,7 +13,4 @@ use Modules\Admin\app\Http\Controllers\AdminController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('admin',[AdminController::class,'index'])->name('admin.index');
-Route::get('admin2',function (){
-    return 'Admin 2';
-});
+Route::get('/',[AdminController::class,'index'])->name('admin.index');

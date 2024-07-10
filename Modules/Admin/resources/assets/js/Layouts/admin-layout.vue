@@ -9,7 +9,7 @@ defineProps(['title'])
     <v-app-bar app>
         <v-toolbar-title>Admin</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn to="/admin">Home</v-btn>
+        <v-btn color="primary"  variant="tonal" to="/admin">Home</v-btn>
         <v-btn  to="/admin/users">Users</v-btn>
         <v-btn to="/admin/roles">Roles</v-btn>
         <v-btn to="/admin/permissions">Permissions</v-btn>

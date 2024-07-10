@@ -11,7 +11,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-/*        $middleware->web([\App\Http\Middleware\HandleAdminInertiaRequests::class]);*/
+       $middleware->append([\App\Http\Middleware\HandleAdminRoutesInertiaRequests::class]);
         $middleware->append([\Modules\Main\Http\Middleware\Localization::class]);
         $middleware->web( [\App\Http\Middleware\HandleInertiaRequests::class,
             ]);
