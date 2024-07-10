@@ -12,6 +12,7 @@ use LogicException;
 use Modules\Admin\Providers\AdminServiceProvider;
 use Modules\Main\Testing\TestResponseModularMacros;
 use Illuminate\Foundation\Testing\TestResponse as LegacyTestResponse;
+use Modules\User\App\Providers\UserServiceProvider;
 use Modules\Website\Providers\WebsiteServiceProvider;
 
 class MainServiceProvider extends ServiceProvider
@@ -147,7 +148,8 @@ class MainServiceProvider extends ServiceProvider
     {
         return [
             WebsiteServiceProvider::class,
-            AdminServiceProvider::class
+            AdminServiceProvider::class,
+            UserServiceProvider::class,
         ];
     }
 
