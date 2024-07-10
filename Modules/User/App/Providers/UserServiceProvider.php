@@ -1,10 +1,11 @@
 <?php
 
-namespace Modules\User\Providers;
+namespace Modules\User\App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Modules\User\app\Providers\FortifyServiceProvider;
+use Modules\User\Providers\EventServiceProvider;
+use Modules\User\Providers\RouteServiceProvider;
 
 class UserServiceProvider extends ServiceProvider
 {
@@ -32,7 +33,6 @@ class UserServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
-        $this->app->register(FortifyServiceProvider::class);
     }
 
     /**
