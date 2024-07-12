@@ -33,8 +33,6 @@
     29 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
     30 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
     31 => 'App\\Providers\\AppServiceProvider',
-    32 => 'Modules\\User\\app\\Providers\\FortifyServiceProvider',
-    33 => 'Modules\\Main\\FortifyServiceProvider',
   ),
   'eager' => 
   array (
@@ -56,8 +54,6 @@
     15 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
     16 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
     17 => 'App\\Providers\\AppServiceProvider',
-    18 => 'Modules\\User\\app\\Providers\\FortifyServiceProvider',
-    19 => 'Modules\\Main\\FortifyServiceProvider',
   ),
   'deferred' => 
   array (

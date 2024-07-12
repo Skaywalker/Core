@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Website\app\View\Components;
+namespace Modules\Website\View\Components;
 
 use Illuminate\Support\Facades\Redis;
 use Illuminate\View\Component;
