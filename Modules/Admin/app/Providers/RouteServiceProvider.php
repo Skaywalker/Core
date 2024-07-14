@@ -2,7 +2,7 @@
 
 namespace Modules\Admin\Providers;
 
-use App\Http\Middleware\HandleAdminRoutesInertiaRequests;
+use Modules\Admin\Middleware\HandleAdminRoutesInertiaRequests;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 

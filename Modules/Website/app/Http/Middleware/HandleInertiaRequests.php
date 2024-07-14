@@ -1,11 +1,8 @@
 <?php
 
-namespace Http\Middleware;
+namespace Modules\Website\Http\Middleware;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\File;
-use Illuminate\Translation\Translator;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware

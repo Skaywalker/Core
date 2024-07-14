@@ -1,11 +1,8 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Admin\app\Middleware;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\File;
-use Illuminate\Translation\Translator;
 use Inertia\Middleware;
 
 class HandAdminleInertiaRequests extends Middleware

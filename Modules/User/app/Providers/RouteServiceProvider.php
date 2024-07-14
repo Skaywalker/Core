@@ -1,9 +1,11 @@
 <?php
 
-namespace Providers;
+namespace Modules\User\Providers;
 
-use Illuminate\Support\Facades\Route;
+
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
+use Modules\Admin\Middleware\HandleAdminRoutesInertiaRequests;
 
 class RouteServiceProvider extends ServiceProvider
 {

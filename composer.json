@@ -30,14 +30,6 @@
             "Database\\Seeders\\": "database/seeders/"
         }
     },
-    "laravel": {
-        "dont-discover": []
-    },
-    "merge-plugin": {
-        "include": [
-            "Modules/*/composer.json"
-        ]
-    },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"

@@ -2,16 +2,16 @@
 
 namespace Modules\Main\Providers;
 
+use Modules\Admin\Providers\AdminServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Testing\TestResponse;
 use Illuminate\View\FileViewFinder;
 use LogicException;
-use Modules\Admin\Providers\AdminServiceProvider;
 use Modules\Main\Testing\TestResponseModularMacros;
 use Illuminate\Foundation\Testing\TestResponse as LegacyTestResponse;
-use Modules\Website\Providers\WebsiteServiceProvider;
-use Providers\UserServiceProvider;
+use Modules\Website\app\Providers\WebsiteServiceProvider;
+use Modules\User\Providers\UserServiceProvider;
 
 class MainServiceProvider extends ServiceProvider
 {
@@ -39,6 +39,7 @@ class MainServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->register(provider: \Modules\Main\Providers\ModulesInertiaServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
         $this->app->bind('inertia.testing.module-view-finder',

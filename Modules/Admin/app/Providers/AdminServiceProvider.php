@@ -1,9 +1,10 @@
 <?php
 
 namespace Modules\Admin\Providers;
-
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\Admin\Providers\EventServiceProvider;
+use Modules\Admin\Providers\RouteServiceProvider;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -29,9 +30,6 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-
-        $this->app->register(EventServiceProvider::class);
-        $this->app->register(RouteServiceProvider::class);
     }
 
     /**
@@ -101,7 +99,10 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function provides(): array
     {
-        return [];
+        return [
+            EventServiceProvider::class,
+            RouteServiceProvider::class,
+        ];
     }
 
     /**

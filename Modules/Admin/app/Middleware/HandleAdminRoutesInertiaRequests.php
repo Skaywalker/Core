@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Modules\Admin\Middleware;
 
+use Admin\app\Middleware\HandAdminleInertiaRequests;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,7 @@ class HandleAdminRoutesInertiaRequests
     {
         // Ellenőrzi, hogy az útvonal admin-e
         if ($request->is('admin*')) {
-            $handAdminleInertiaRequests = new \App\Http\Middleware\HandAdminleInertiaRequests;
+            $handAdminleInertiaRequests = new HandAdminleInertiaRequests();
             return $handAdminleInertiaRequests->handle($request, $next);
             // Itt alkalmazza a HandleInertiaRequests logikát
             // Például közvetlenül meghívhatja a HandleInertiaRequests köztes réteget,
