@@ -8,9 +8,10 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Testing\TestResponse;
 use Illuminate\View\FileViewFinder;
 use LogicException;
+use Modules\Main\Console\Smigrate;
 use Modules\Main\Testing\TestResponseModularMacros;
 use Illuminate\Foundation\Testing\TestResponse as LegacyTestResponse;
-use Modules\Website\app\Providers\WebsiteServiceProvider;
+use Modules\Website\Providers\WebsiteServiceProvider;
 use Modules\User\Providers\UserServiceProvider;
 
 class MainServiceProvider extends ServiceProvider
@@ -60,7 +61,9 @@ class MainServiceProvider extends ServiceProvider
      */
     protected function registerCommands(): void
     {
-        // $this->commands([]);
+        $this->commands([
+            Smigrate::class,
+        ]);
     }
 
     /**
