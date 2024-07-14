@@ -10,8 +10,8 @@ use LogicException;
 use Modules\Admin\Providers\AdminServiceProvider;
 use Modules\Main\Testing\TestResponseModularMacros;
 use Illuminate\Foundation\Testing\TestResponse as LegacyTestResponse;
-use Modules\User\app\Providers\UserServiceProvider;
 use Modules\Website\Providers\WebsiteServiceProvider;
+use Providers\UserServiceProvider;
 
 class MainServiceProvider extends ServiceProvider
 {
