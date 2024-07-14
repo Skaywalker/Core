@@ -1,10 +1,10 @@
 <?php
 
 
-use  Modules\Admin\Middleware\HandleAdminRoutesInertiaRequests;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Modules\Website\Http\Middleware\HandleInertiaRequests;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -13,9 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-       $middleware->append([HandleAdminRoutesInertiaRequests::class]);
+        $middleware->append([\Modules\Admin\Http\Middleware\HandleAdminRoutesInertiaRequests::class]);
         $middleware->append([\Modules\Main\Http\Middleware\Localization::class]);
-        $middleware->web( [\App\Http\Middleware\HandleInertiaRequests::class,
+        $middleware->web( [HandleInertiaRequests::class,
             ]);
 
 

@@ -2,9 +2,9 @@
 
 namespace Modules\Admin\Providers;
 
-use Modules\Admin\Middleware\HandleAdminRoutesInertiaRequests;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Modules\Admin\Http\Middleware\HandleAdminRoutesInertiaRequests;
 
 class RouteServiceProvider extends ServiceProvider
 {

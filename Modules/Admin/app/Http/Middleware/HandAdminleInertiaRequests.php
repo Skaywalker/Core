@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Modules\Admin\Http\Middleware;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\File;
-use Illuminate\Translation\Translator;
 use Inertia\Middleware;
 
-class HandleInertiaRequests extends Middleware
+class HandAdminleInertiaRequests extends Middleware
 {
     /**
      * The root template that's loaded on the first page visit.
@@ -17,7 +14,7 @@ class HandleInertiaRequests extends Middleware
      *
      * @var string
      */
-    protected $rootView = 'app';
+    protected $rootView = 'adminApp';
 
     /**
      * Determines the current asset version.

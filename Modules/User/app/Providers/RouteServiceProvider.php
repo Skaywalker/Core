@@ -5,7 +5,7 @@ namespace Modules\User\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
-use Modules\Admin\Middleware\HandleAdminRoutesInertiaRequests;
+use Modules\Admin\Http\Middleware\HandleAdminRoutesInertiaRequests;
 
 class RouteServiceProvider extends ServiceProvider
 {
