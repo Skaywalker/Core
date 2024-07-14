@@ -12,15 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      - uses: shivammathur/ssetup-php@v2
         with:
           php-version: '8.2'
-      - uses: actions/setup-node@v4
-        name: Node install
-        with:
-          node-version: 20
-          cache: 'npm'
-          run: npm install
       - uses: actions/checkout@v4
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
@@ -35,7 +29,8 @@ jobs:
         run: |
           mkdir -p database
           touch database/database.sqlite
-
+      -  name: Node install
+         run: npm install
       - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
         env:
           DB_CONNECTION: sqlite
