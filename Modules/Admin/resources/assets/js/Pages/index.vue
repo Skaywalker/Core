@@ -2,7 +2,7 @@
 import {usePage} from '@inertiajs/vue3';
 import AdminLayout from "@AdminModule/Layouts/admin-layout.vue";
 import {inject} from "vue";
-defineProps(['value']);
+defineProps(['value','app','lang']);
 
 </script>
 
@@ -12,6 +12,7 @@ defineProps(['value']);
 
   <a href="/lang/en">english</a> <br>
   <a href="/lang/hu">Hungary</a>
+    <br>{{app+' '+ value+'/'+lang}}
     <br>
     {{trans('admin::module.welcome')}}
   </admin-layout>

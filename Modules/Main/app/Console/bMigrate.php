@@ -5,7 +5,7 @@ namespace Modules\Main\Console;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-class Smigrate extends Command
+class bMigrate extends Command
 {
     /**
      * The name and signature of the console command.

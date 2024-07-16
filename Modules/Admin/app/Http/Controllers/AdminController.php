@@ -5,10 +5,8 @@ namespace Modules\Admin\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Translation\Translator;
 use Inertia\Inertia;
 
 class AdminController extends Controller
@@ -19,8 +17,11 @@ class AdminController extends Controller
     public function index()
     {
         Redis::set('kuka', 'redis test');
-        $value = Session::get('locale');
-        return Inertia::module('Admin::index', ['value' => $value]);
+        $value = Session::get('lang');
+
+        $app=app()->getLocale();
+        $lang=lang();
+        return Inertia::module('Admin::index', ['value' => $value, 'app' => $app,'lang'=>$lang]);
     }
 
     /**
