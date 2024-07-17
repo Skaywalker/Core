@@ -19,7 +19,8 @@
         "psr-4": {
             "Modules\\Main\\": "app/",
             "Modules\\Main\\Database\\Factories\\": "database/factories/",
-            "Modules\\Main\\Database\\Seeders\\": "database/seeders/"
+            "Modules\\Main\\Database\\Seeders\\": "database/seeders/",
+            "Modules\\Main\\Database\\KeepSeeders\\": "database/KeepSeeders/"
         },
         "files":[
             "helpers.php"

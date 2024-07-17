@@ -192,8 +192,7 @@ return [
     */
     'commands' => ConsoleServiceProvider::defaultCommands()
         ->merge([
-            \Modules\Main\Console\MigrateSeed::class,
-            Modules\Main\Console\MigrateSeedKeep::class,
+            Modules\Main\Console\ModuleSeedKeep::class,
             \Modules\Main\Console\MakeSeedKeep::class
         ])->toArray(),
 

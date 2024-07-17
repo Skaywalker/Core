@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -24,7 +25,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->timestamps();
         });
-        Schema::create('role_user', function (Blueprint $table) {
+        Schema::create('roles_user', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('role_id');
 
@@ -46,26 +47,28 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('permission_roles', function (Blueprint $table) {
-            $table->dropForeign(['permission_id']);
-            $table->dropForeign(['role_id']);
-        });
-        Schema::rename('permission_roles', 'old_permission_roles');
-        Schema::table('old_permission_roles',function (Blueprint $table){
-            $table->foreign('permission_id')->references('id')->on('old_permissions')->onDelete('cascade');
-            $table->foreign('role_id')->references('id')->on('old_roles')->onDelete('cascade');
-        });
-        Schema::table('role_user', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropForeign(['role_id']);
-        });
-        Schema::rename('role_user', 'old_role_user');
-        Schema::table('old_role_user',function (Blueprint $table){
-            $table->foreign('user_id')->references('id')->on('old_users')->onDelete('cascade');
-            $table->foreign('role_id')->references('id')->on('old_roles')->onDelete('cascade');
-        });
-        Schema::dropIfExists('permission_roles');
-        Schema::dropIfExists('role_user');
 
+      if (Schema::hasTable('permission_roles')&&DB::table('permission_roles')->count()) {
+            Schema::dropIfExists('old_permission_roles');
+            Schema::rename('permission_roles', 'old_permission_roles');
+      }
+        Schema::dropIfExists('permission_roles');
+        if (Schema::hasTable('permissions')&&DB::table('permissions')->count()) {
+            Schema::dropIfExists('old_permissions');
+            Schema::rename('permissions', 'old_permissions');
+        }
+        Schema::dropIfExists('permissions');
+        if (Schema::hasTable('roles_user')&&DB::table('roles_user')->count()) {
+            Schema::dropIfExists('old_roles_user');
+            Schema::rename('roles_user', 'old_roles_user');
+        }
+        Schema::dropIfExists('roles_user');
+
+        if (Schema::hasTable('roles')&&DB::table('roles')->count()) {
+            Schema::dropIfExists('old_roles');
+            Schema::rename('roles', 'old_roles');
+        }
+        Schema::dropIfExists('roles');
     }
+
 };

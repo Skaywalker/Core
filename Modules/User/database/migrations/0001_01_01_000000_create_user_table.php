@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Fortify\Fortify;
 
@@ -48,8 +49,11 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(): void
-    {
-        if (Schema::hasTable('users') && Schema::hasTable('password_reset_tokens')) {
+    {if (Schema::hasTable('users')&& DB::table('users')->count()) {
+            Schema::dropIfExists('old_users');
+            Schema::rename('users', 'old_users');
+        }
+        if (Schema::hasTable('password_reset_tokens')&& DB::table('password_reset_tokens')->count()) {
             Schema::dropIfExists('old_users');
             Schema::rename('users', 'old_users');
             Schema::dropIfExists('old_password_reset_tokens');

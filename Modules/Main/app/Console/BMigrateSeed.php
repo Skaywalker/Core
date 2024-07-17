@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 //Kiskuta
-class MigrateSeed extends Command
+class BMigrateSeed extends Command
 {
     /**
      * The name and signature of the console command.

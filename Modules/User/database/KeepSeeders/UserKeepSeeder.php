@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Schema;
 
 class UserKeepSeeder extends Seeder
 {
-    protected $table="user";
+    protected $table="users";
     /**
      * Run the database seeds.
      *
@@ -18,6 +18,7 @@ class UserKeepSeeder extends Seeder
      */
     public function run()
     {
+
         Model::unguard();
         if (Schema::hasTable('old_'.$this->table)) {
             $oldItems = DB::table('old_'.$this->table)->get()->toArray();

@@ -19,7 +19,8 @@
         "psr-4": {
             "Modules\\Website\\": "app/",
             "Modules\\Website\\Database\\Factories\\": "database/factories/",
-            "Modules\\Website\\Database\\Seeders\\": "database/seeders/"
+            "Modules\\Website\\Database\\Seeders\\": "database/seeders/",
+            "Modules\\Website\\Database\\KeepSeeders\\": "database/KeepSeeders/"
         }
     },
     "autoload-dev": {

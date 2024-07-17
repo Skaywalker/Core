@@ -9,7 +9,8 @@ use Illuminate\Testing\TestResponse;
 use Illuminate\View\FileViewFinder;
 use LogicException;
 use Modules\Main\Console\bMigrate;
-use Modules\Main\Console\MigrateSeed;
+use Modules\Main\Console\BMigrateSeed;
+use Modules\Main\Console\BMigrateSeedKeep;
 use Modules\Main\Testing\TestResponseModularMacros;
 use Illuminate\Foundation\Testing\TestResponse as LegacyTestResponse;
 use Modules\Website\Providers\WebsiteServiceProvider;
@@ -64,7 +65,8 @@ class MainServiceProvider extends ServiceProvider
     {
         $this->commands([
             bMigrate::class,
-            MigrateSeed::class,
+            BMigrateSeed::class,
+            BMigrateSeedKeep::class
         ]);
     }
 
