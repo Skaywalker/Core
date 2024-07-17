@@ -10,7 +10,7 @@ class HandleAdminRoutesInertiaRequests
     public function handle(Request $request, Closure $next)
     {
         // Ellenőrzi, hogy az útvonal admin-e
-        if ($request->is('admin*')) {
+        if ($request->is('admin\*')||$request->is('admin')) {
             $handAdminleInertiaRequests = new \Modules\Admin\Http\Middleware\HandAdminleInertiaRequests;
             return $handAdminleInertiaRequests->handle($request, $next);
             // Itt alkalmazza a HandleInertiaRequests logikát

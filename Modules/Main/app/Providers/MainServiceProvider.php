@@ -2,13 +2,14 @@
 
 namespace Modules\Main\Providers;
 
-use Modules\Admin\app\Providers\AdminServiceProvider;
+use Modules\Admin\Providers\AdminServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Testing\TestResponse;
 use Illuminate\View\FileViewFinder;
 use LogicException;
 use Modules\Main\Console\bMigrate;
+use Modules\Main\Console\MigrateSeed;
 use Modules\Main\Testing\TestResponseModularMacros;
 use Illuminate\Foundation\Testing\TestResponse as LegacyTestResponse;
 use Modules\Website\Providers\WebsiteServiceProvider;
@@ -63,6 +64,7 @@ class MainServiceProvider extends ServiceProvider
     {
         $this->commands([
             bMigrate::class,
+            MigrateSeed::class,
         ]);
     }
 

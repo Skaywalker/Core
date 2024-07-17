@@ -49,8 +49,13 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (Schema::hasTable('users') && Schema::hasTable('password_reset_tokens')) {
+            Schema::dropIfExists('old_users');
+            Schema::rename('users', 'old_users');
+            Schema::dropIfExists('old_password_reset_tokens');
+            Schema::rename('password_reset_tokens', 'old_password_reset_tokens');
+        }
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('sessions');
     }
 };

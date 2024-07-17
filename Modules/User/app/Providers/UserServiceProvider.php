@@ -4,6 +4,7 @@ namespace Modules\User\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\User\Console\CrateSuperAdmin;
 
 class UserServiceProvider extends ServiceProvider
 {
@@ -38,7 +39,9 @@ class UserServiceProvider extends ServiceProvider
      */
     protected function registerCommands(): void
     {
-        // $this->commands([]);
+        $this->commands([
+            CrateSuperAdmin::class
+        ]);
     }
 
     /**

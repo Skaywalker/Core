@@ -35,7 +35,7 @@ return [
             'views/master' => 'resources/views/layouts/master.blade.php',
             'scaffold/config' => 'config/config.php',
             'composer' => 'composer.json',
-            'assets/js/app' => 'resources/assets/js/app.ts',
+            'assets/js/app' => 'resources/assets/js/app.js',
             'assets/scss/app' => 'resources/assets/scss/app.scss',
             'vite' => 'vite.config.js',
             'package' => 'package.json',
@@ -61,7 +61,7 @@ return [
                 'APP_FOLDER_NAME',
             ],
         ],
-        'gitkeep' => true,
+        'gitkeep' => false,
     ],
     'paths' => [
         /*
@@ -163,7 +163,7 @@ return [
             'factory' => ['path' => 'database/factories', 'generate' => true],
             'migration' => ['path' => 'database/migrations', 'generate' => true],
             'seeder' => ['path' => 'database/seeders', 'generate' => true],
-
+            'keepSeed'=> ['path' => 'database/KeepSeeders', 'generate' => true],
             // lang/
             'lang' => ['path' => 'resources/lang', 'generate' => false],
 
@@ -192,7 +192,9 @@ return [
     */
     'commands' => ConsoleServiceProvider::defaultCommands()
         ->merge([
-            // New commands go here
+            \Modules\Main\Console\MigrateSeed::class,
+            Modules\Main\Console\MigrateSeedKeep::class,
+            \Modules\Main\Console\MakeSeedKeep::class
         ])->toArray(),
 
     /*
