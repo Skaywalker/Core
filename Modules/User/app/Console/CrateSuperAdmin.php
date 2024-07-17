@@ -4,8 +4,7 @@ namespace Modules\User\Console;
 
 use Illuminate\Console\Command;
 use Modules\User\Actions\Fortify\PasswordValidationRules;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
+use Modules\User\Models\User;
 use Modules\User\Database\Factories\AdminUserFactoryFactory;
 
 //Kiskuta
@@ -23,19 +22,16 @@ class CrateSuperAdmin extends Command
      */
     protected $description = 'Seeds an admin user with a specified email and password';
 
-    /**
-     * Create a new command instance.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
+        if (User::exists()) {
+            $this->error('Super admin already exists');
+            return;
+        }
         do{
         $email= $this->ask('Please enter the email of the super admin');
         $validatorEmail=validator(['email'=>$email],['email'=>'required|email'],[
@@ -63,21 +59,5 @@ class CrateSuperAdmin extends Command
         }}while ($validatorPassword->fails());
         AdminUserFactoryFactory::new()->withEmail($email)->withPassword($password)->create();
         $this->info('Super admin created, email: '.$email.' password: '.$password);
-    }
-
-    /**
-     * Get the console command arguments.
-     */
-    protected function getArguments(): array
-    {
-       return [];
-    }
-
-    /**
-     * Get the console command options.
-     */
-    protected function getOptions(): array
-    {
-        return [];
     }
 }

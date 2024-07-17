@@ -33,12 +33,21 @@ class BMigrateSeedKeep extends Command
     public function handle()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        $this->warn('Foreign key checks are off.');
+        $this->info('Migrate-rollback start');
         $this->call('module:migrate-rollback');
+        $this->info('Migrate-rollback end');
+        $this->info('Migrate start');
         $this->call('module:migrate');
+        $this->info('Migrate end');
+        $this->info('Seed-keep start');
         $this->call('module:seed-keep');
+        $this->info('Seed-keep end');
         $this->info('Migrated and seeded and keep successfully.');
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        $this->info('Foreign key checks are on.');
+
     }
 
     /**

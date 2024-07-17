@@ -33,8 +33,8 @@ class BMigrateSeed extends Command
     {
         $this->call('db:wipe');
         $this->call('module:migrate');
-        $this->call('bcms:create-super-admin');
         $this->call('module:seed');
+        $this->call('bcms:create-super-admin');
         $this->info('Migrated and seeded successfully.');
     }
 
