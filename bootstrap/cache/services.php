@@ -32,8 +32,9 @@
     28 => 'Termwind\\Laravel\\TermwindServiceProvider',
     29 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
     30 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
-    31 => 'App\\Providers\\AppServiceProvider',
-    32 => 'Modules\\User\\Providers\\FortifyServiceProvider',
+    31 => 'Tighten\\Ziggy\\ZiggyServiceProvider',
+    32 => 'App\\Providers\\AppServiceProvider',
+    33 => 'Modules\\User\\Providers\\FortifyServiceProvider',
   ),
   'eager' => 
   array (
@@ -54,8 +55,9 @@
     14 => 'Termwind\\Laravel\\TermwindServiceProvider',
     15 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
     16 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
-    17 => 'App\\Providers\\AppServiceProvider',
-    18 => 'Modules\\User\\Providers\\FortifyServiceProvider',
+    17 => 'Tighten\\Ziggy\\ZiggyServiceProvider',
+    18 => 'App\\Providers\\AppServiceProvider',
+    19 => 'Modules\\User\\Providers\\FortifyServiceProvider',
   ),
   'deferred' => 
   array (

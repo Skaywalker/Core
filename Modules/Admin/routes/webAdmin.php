@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AdminController;
+use Modules\Admin\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,4 +14,6 @@ use Modules\Admin\Http\Controllers\AdminController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',[AdminController::class,'index'])->name('admin.index');
+Route::get('/',[AdminController::class,'index'])->name('index');
+Route::get('/login',[AuthController::class,'loginPage'])->name('login');
+Route::post('/login',[AuthController::class,'loginPost'])->name('login-post');

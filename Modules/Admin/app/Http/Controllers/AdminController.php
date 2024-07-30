@@ -16,7 +16,6 @@ class AdminController extends Controller
      */
     public function index()
     {
-        Redis::set('kuka', 'redis test');
         $value = Session::get('lang');
 
         $app=app()->getLocale();

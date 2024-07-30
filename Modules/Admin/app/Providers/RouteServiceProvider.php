@@ -4,7 +4,7 @@ namespace Modules\Admin\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Modules\Admin\Http\Middleware\HandleAdminRoutesInertiaRequests;
+use Modules\Admin\Http\Middleware\AdminApp;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes(): void
     {
         Route::middleware('web')->group(module_path('Admin', '/routes/web.php'));
-        Route::middleware(['web',HandleAdminRoutesInertiaRequests::class])->prefix('admin')->name('adminWeb.')->group(module_path('Admin', '/routes/webAdmin.php'));
+        Route::middleware(['web',AdminApp::class])->prefix('admin')->name('adminWeb.')->group(module_path('Admin', '/routes/webAdmin.php'));
 
     }
 

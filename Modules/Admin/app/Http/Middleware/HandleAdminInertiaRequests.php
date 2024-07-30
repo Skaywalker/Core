@@ -2,10 +2,20 @@
 
 namespace Modules\Admin\Http\Middleware;
 
+use Illuminate\Contracts\Routing\UrlRoutable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Reflector;
+use Illuminate\Support\Str;
 use Inertia\Middleware;
+use Modules\Admin\Class\AdminRouter;
+use ReflectionClass;
+use ReflectionMethod;
+use ReflectionProperty;
+use Tighten\Ziggy\Ziggy;
 
-class HandAdminleInertiaRequests extends Middleware
+class HandleAdminInertiaRequests extends Middleware
 {
     /**
      * The root template that's loaded on the first page visit.
@@ -35,8 +45,15 @@ class HandAdminleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        return array_merge(parent::share($request), [
-            //
-        ]);
+
+        return [...parent::share($request),
+            'Ziggy' => fn() => [
+                ...(new AdminRouter)->toArray(), [
+                    'location' => $request->url(),
+                ],
+            ],
+            'flash' => fn() => collect(session()->get('_flash')['new']??[])
+                ->mapWithKeys(fn($value) => [$value => session()->get($value)])
+                ->toArray()];
     }
 }

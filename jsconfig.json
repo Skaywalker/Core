@@ -1,19 +1,18 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "module": "esnext",
-    "target": "esnext",
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./resources/js/*"],
       "@Modules/*": ["./Modules/*"],
-      "@AdminModule/*": ["./Modules/Admin/resources/assets/js/*"]
+      "@AdminModule/*": ["./Modules/Admin/resources/assets/js/*"],
+      "ziggy-js": ["./vendor/tightenco/ziggy"]
     }
   },
   "include": [
-    "Modules/**/Resources/assets/js/**/*.ts",
-    "Modules/**/Resources/assets/js/**/*.d.ts",
+    "Modules/**/Resources/assets/js/**/*.js",
+    "Modules/**/Resources/assets/js/**/*.d.js",
     "Modules/**/Resources/assets/js/**/*.vue",
     "./resources/js/**/*.ts",
     "./resources/js/**/*.d.ts",

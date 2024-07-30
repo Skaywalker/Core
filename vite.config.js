@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import viteSass from 'vite-plugin-sass';
+
 
 // @ts-ignore
 import path, {resolve} from "path";
@@ -14,6 +16,7 @@ const host = 'core.test';
 async function getConfig() {
     const paths = [];
     const allPaths = await collectModuleAssetsPaths(paths, 'Modules');
+
     return defineConfig({
         server:{
             host,
@@ -22,7 +25,6 @@ async function getConfig() {
         },
 
         plugins: [
-
             laravel({
                 input: allPaths,
                 // ssr: 'resources/js/ssr.js',
@@ -56,6 +58,8 @@ async function getConfig() {
                 // @ts-ignore
 
                 '@WebsiteModule':path.resolve(__dirname, 'Modules/Admin/resources/assets/js'),
+                'ziggy-js': path.resolve('vendor/tightenco/ziggy'),
+
             },
         },
     });

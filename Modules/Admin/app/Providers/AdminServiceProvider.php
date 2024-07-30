@@ -1,10 +1,16 @@
 <?php
 
 namespace Modules\Admin\Providers;
+
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Compilers\BladeCompiler;
+use Modules\Admin\Class\AdminBladeRouteGenerator;
 use Modules\Admin\Providers\EventServiceProvider;
 use Modules\Admin\Providers\RouteServiceProvider;
+use Modules\Main\Class\BladeRouteGenerator;
+
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -17,12 +23,21 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if ($this->app->resolved('blade.compiler')) {
+            $this->registerDirective($this->app['blade.compiler']);
+        } else {
+            $this->app->afterResolving('blade.compiler', $this->registerDirective(...));
+        }
         $this->registerCommands();
         $this->registerCommandSchedules();
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'database/migrations'));
+
+        Event::listen(RequestReceived::class, function () {
+            BladeRouteGenerator::$generated = false;
+        });
     }
 
     /**
@@ -56,7 +71,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function registerTranslations(): void
     {
-        $langPath = resource_path('lang/modules/'.$this->moduleNameLower);
+        $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
@@ -72,7 +87,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected function registerConfig(): void
     {
-        $this->publishes([module_path($this->moduleName, 'config/config.php') => config_path($this->moduleNameLower.'.php')], 'config');
+        $this->publishes([module_path($this->moduleName, 'config/config.php') => config_path($this->moduleNameLower . '.php')], 'config');
         $this->mergeConfigFrom(module_path($this->moduleName, 'config/config.php'), $this->moduleNameLower);
     }
 
@@ -81,14 +96,14 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function registerViews(): void
     {
-        $viewPath = resource_path('views/modules/'.$this->moduleNameLower);
+        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
         $sourcePath = module_path($this->moduleName, 'resources/views');
 
-        $this->publishes([$sourcePath => $viewPath], ['views', $this->moduleNameLower.'-module-views']);
+        $this->publishes([$sourcePath => $viewPath], ['views', $this->moduleNameLower . '-module-views']);
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
 
-        $componentNamespace = str_replace('/', '\\', config('modules.namespace').'\\'.$this->moduleName.'\\'.ltrim(config('modules.paths.generator.component-class.path'), config('modules.paths.app_folder', '')));
+        $componentNamespace = str_replace('/', '\\', config('modules.namespace') . '\\' . $this->moduleName . '\\' . ltrim(config('modules.paths.generator.component-class.path'), config('modules.paths.app_folder', '')));
         Blade::componentNamespace($componentNamespace, $this->moduleNameLower);
     }
 
@@ -112,11 +127,16 @@ class AdminServiceProvider extends ServiceProvider
     {
         $paths = [];
         foreach (config('view.paths') as $path) {
-            if (is_dir($path.'/modules/'.$this->moduleNameLower)) {
-                $paths[] = $path.'/modules/'.$this->moduleNameLower;
+            if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
+                $paths[] = $path . '/modules/' . $this->moduleNameLower;
             }
         }
 
         return $paths;
+    }
+
+    protected function registerDirective(BladeCompiler $blade): void
+    {
+        $blade->directive('admin', fn($group) => "<?php echo app('" .BladeRouteGenerator::class . "')->generate(new AdminRouter({$group})); ?>");
     }
 }

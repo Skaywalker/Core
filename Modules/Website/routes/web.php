@@ -20,6 +20,7 @@ Route::group([], function () {
 Route::get('/lang/{locale?}',function ($locale){
     if (!in_array($locale,config('app.available_languages'))){
         session()->forget('lang');
+        app()->setLocale(config('app.locale'));
         return redirect()->back();
     }
     app()->setLocale($locale);

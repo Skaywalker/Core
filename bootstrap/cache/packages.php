@@ -70,4 +70,11 @@
       'Flare' => 'Spatie\\LaravelIgnition\\Facades\\Flare',
     ),
   ),
+  'tightenco/ziggy' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Tighten\\Ziggy\\ZiggyServiceProvider',
+    ),
+  ),
 );

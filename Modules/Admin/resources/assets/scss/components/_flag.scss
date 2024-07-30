@@ -1,0 +1,15 @@
+.flag{
+  border-radius: 50%;
+  height: calc(28px + 12px);
+  width:calc(28px + 12px);
+  opacity: 75%;
+}
+.current-flag{
+  border-radius: 50%;
+  height: calc(28px + 12px);
+  width:calc(28px + 12px);
+}
+.flag:hover{
+  border: 1px solid #000;
+  opacity: 100%;
+}

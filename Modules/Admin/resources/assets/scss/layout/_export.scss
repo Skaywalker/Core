@@ -1,0 +1,15 @@
+@use 'sass:map';
+@use 'colors';
+:root {
+  @each $theme, $theme-map in colors.$Theme {
+    @each $key, $value in $theme-map {
+      @if type-of($value) == 'map' {
+        @each $subkey, $subvalue in $value {
+          --#{$theme}-#{$key}-#{$subkey}: #{$subvalue};
+        }
+      } @else {
+        --#{$theme}-#{$key}: #{$value};
+      }
+    }
+  }
+}
