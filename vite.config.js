@@ -59,7 +59,7 @@ async function getConfig() {
 
                 '@WebsiteModule':path.resolve(__dirname, 'Modules/Admin/resources/assets/js'),
                 'ziggy-js': path.resolve('vendor/tightenco/ziggy'),
-
+                '@adminRouteIndex': path.resolve(__dirname, './Modules/Admin/resources/assets/js/Plugins/adminRouteIndex.js')
             },
         },
     });

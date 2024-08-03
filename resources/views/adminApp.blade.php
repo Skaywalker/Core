@@ -17,8 +17,12 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <link  >
-    @admin
-    @vite(['Modules/Admin/resources/assets/js/adminApp.js',])
+{{--    @admin--}}
+
+    @php
+    $component= explode('::', $page['component']);
+    @endphp
+    @vite(['Modules/Admin/resources/assets/js/adminApp.js',"Modules/$component[0]/$component[1].vue"])
     @inertiaHead
 </head>
 <body >

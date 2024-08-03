@@ -3,9 +3,7 @@ import { createApp, h} from 'vue'
 import {createInertiaApp} from '@inertiajs/vue3';
 import {resolvePageComponent} from "laravel-vite-plugin/inertia-helpers";
 import Trans from './Plugins/Translations';
- import { ZiggyVue } from '../../../../../vendor/tightenco/ziggy';
-
-
+import {adminRouter} from "@AdminModule/Plugins/adminRouteIndex.js";
  import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 
 import '../scss/app.scss';
@@ -137,7 +135,7 @@ createInertiaApp({
             .use(plugin)
             .use(vuetify)
             .use(Trans)
-            .use(ZiggyVue)
+            .use(adminRouter)
             .mount(el)
     },
     progress: {

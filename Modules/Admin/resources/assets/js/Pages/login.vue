@@ -1,14 +1,13 @@
 <script setup>
-
-import {defineComponent} from "vue";
-import AdminLayout from "@AdminModule/Layouts/admin-layout.vue";
 import AdminGuestLayout from "@AdminModule/Layouts/admin-guest-layout.vue";
 import ChangeLangComponent from "@AdminModule/Components/ChangeLangComponent.vue";
 import {inject} from "vue";
 import {useForm} from "@inertiajs/vue3";
 import ThemeChange from "@AdminModule/Components/ThemeChange.vue";
 const trans = inject('translate');
-import { route } from 'ziggy-js';
+//import {route} from 'ziggy-js'
+import { route } from '@AdminModule/Plugins/adminRouteIndex.js';
+
 import AlertMessageBox from "@AdminModule/Components/AlertMessageBox.vue";
 
 const form = useForm({
@@ -16,7 +15,7 @@ const form = useForm({
     password: '',
     remember: false,
 });
-console.log(route())
+console.log(route());
 const submit=()=>{
   form.post(route('adminWeb.login-post'),
       {

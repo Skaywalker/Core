@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Testing\TestResponse;
 use Illuminate\View\FileViewFinder;
 use LogicException;
+use Modules\Main\Console\BCMSAdminRouteGenerate;
 use Modules\Main\Console\bMigrate;
 use Modules\Main\Console\BMigrateSeed;
 use Modules\Main\Console\BMigrateSeedKeep;
@@ -66,7 +67,8 @@ class MainServiceProvider extends ServiceProvider
         $this->commands([
             bMigrate::class,
             BMigrateSeed::class,
-            BMigrateSeedKeep::class
+            BMigrateSeedKeep::class,
+            BCMSAdminRouteGenerate::class,
         ]);
     }
 

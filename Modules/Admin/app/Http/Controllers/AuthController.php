@@ -15,10 +15,6 @@ class AuthController extends Controller
 
     public function loginPage():InertiaResponse
     {
-        \Log::channel('dev')->info('Login Page',['app'=>app()->getLocale(),'lang'=>lang()]);
-
-        FleshMessages::alertMessage(trans('admin::alerts.error',),trans('admin::alerts.message',),'success',true);
-
      return Inertia::module('Admin::login');
     }
     public function loginPost(Request $request):RedirectResponse
