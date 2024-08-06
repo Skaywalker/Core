@@ -4,7 +4,6 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Modules\Website\Http\Middleware\HandleInertiaRequests;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -13,9 +12,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->web(append: [
+            \Modules\Admin\Http\Middleware\HandleAdminInertiaRequests::class,
+            \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
 
-        $middleware->web( [\Modules\Main\Http\Middleware\Localization::class,HandleInertiaRequests::class,
-            ]);
+            \Modules\Main\Http\Middleware\Localization::class,
+
+        ]);
 
 
     })

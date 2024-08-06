@@ -2,6 +2,8 @@
 
 namespace Modules\Main\Providers;
 
+use Illuminate\Support\Collection;
+use Modules\Admin\Http\Middleware\HandleAdminInertiaRequests;
 use Modules\Admin\Providers\AdminServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -14,6 +16,7 @@ use Modules\Main\Console\BMigrateSeed;
 use Modules\Main\Console\BMigrateSeedKeep;
 use Modules\Main\Testing\TestResponseModularMacros;
 use Illuminate\Foundation\Testing\TestResponse as LegacyTestResponse;
+use Modules\User\Providers\FortifyServiceProvider;
 use Modules\Website\Providers\WebsiteServiceProvider;
 use Modules\User\Providers\UserServiceProvider;
 
@@ -35,6 +38,11 @@ class MainServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'database/migrations'));
         $this->registerTestingMacros();
+        $middlewareGroups = $this->getMiddlewareGroups();
+        $middlewareGroups->map(function($middlewareGroup , $key){
+
+            $this->app['router']->middlewareGroup($key,$middlewareGroup );
+        });
 
     }
 
@@ -46,6 +54,11 @@ class MainServiceProvider extends ServiceProvider
         $this->app->register(provider: \Modules\Main\Providers\ModulesInertiaServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(provider: AuthServiceProvider::class);
+        $this->app->register(provider:  FortifyServiceProvider::class);
+        $this->app->register(provider:   WebsiteServiceProvider::class);
+        $this->app->register(provider:   AdminServiceProvider::class);
+        $this->app->register(provider:   UserServiceProvider::class);
         $this->app->bind('inertia.testing.module-view-finder',
             function ($app,$params=null){
                 $moduleName = $params['moduleName'] ?? null;
@@ -152,13 +165,15 @@ class MainServiceProvider extends ServiceProvider
      *
      * @return array<string>
      */
-    public function provides(): array
+    public function provides(): Collection
     {
-        return [
+        return collect([
+            AuthServiceProvider::class,
+            FortifyServiceProvider::class,
             WebsiteServiceProvider::class,
             AdminServiceProvider::class,
             UserServiceProvider::class,
-        ];
+        ]);
     }
 
     /**
@@ -181,5 +196,16 @@ class MainServiceProvider extends ServiceProvider
                      TestResponse::mixin(new TestResponseModularMacros());
          return;
         }
+    }
+    public function getMiddlewareGroups():Collection
+    {
+        return collect([
+            'auth:session'=>[
+                config('main.auth')
+            ],
+            'adminApp'=>[
+                HandleAdminInertiaRequests::class
+            ],
+        ]);
     }
 }

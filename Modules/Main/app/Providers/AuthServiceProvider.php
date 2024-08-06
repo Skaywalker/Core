@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\User\Providers;
+namespace Modules\Main\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as IlluminateAuthServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -24,7 +24,7 @@ class AuthServiceProvider extends IlluminateAuthServiceProvider
    }
     protected function getPermissions(): \Illuminate\Database\Eloquent\Collection
     {
-        return Permission::with('roles')->get();
+        return Permission::with('permissionToRole')->get();
     }
     protected function getPermissionsExit(): bool
     {

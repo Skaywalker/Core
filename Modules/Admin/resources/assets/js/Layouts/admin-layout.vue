@@ -1,6 +1,11 @@
 <script setup xmlns:Head="http://www.w3.org/1999/html">
-import {Head} from "@inertiajs/vue3";
+import {Head, router, useForm} from "@inertiajs/vue3";
+import { route } from '@AdminModule/Plugins/adminRouteIndex.js';
 defineProps(['title'])
+const logout=()=>{
+  console.log('logout')
+  router.post('/logout',{})
+}
 </script>
 
 <template>
@@ -14,7 +19,7 @@ defineProps(['title'])
         <v-btn to="/admin/roles">Roles</v-btn>
         <v-btn to="/admin/permissions">Permissions</v-btn>
         <v-btn to="/admin/settings">Settings</v-btn>
-        <v-btn  to="/admin/logout">Logout</v-btn>
+        <v-btn  @click="logout">Logout</v-btn>
     </v-app-bar>
     <v-main>
         <v-container>

@@ -191,7 +191,6 @@ class ModuleSeedKeep extends BaseCommand
      */
     protected function renderException($output, \Exception $e)
     {
-        dd($output,$e);
         $this->laravel[ExceptionHandler::class]->renderForConsole($output, $e);
     }
 
@@ -203,7 +202,6 @@ class ModuleSeedKeep extends BaseCommand
      */
     protected function reportException(\Exception $e)
     {
-        dd($e);
         $this->laravel[ExceptionHandler::class]->report($e);
     }
 

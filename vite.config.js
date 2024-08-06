@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import viteSass from 'vite-plugin-sass';
+import {run}from 'vite-plugin-run';
 
 
 // @ts-ignore
@@ -38,7 +39,13 @@ async function getConfig() {
                     },
                 },
             }),
-
+            run([
+                {
+                    name:'admin-route-generate',
+                    run:['php','artisan','bcms:admin-route-generate'],
+                    pattern:['Modules/**/routes/webAdmin.php','Modules/**/routes/apiAdmin.php']
+                }
+            ]),
         ],
         build:{
             outDir: 'public/build',

@@ -1,6 +1,7 @@
 <?php
 
 use Laravel\Fortify\Features;
+use Modules\User\Models\User;
 
 return [
 
@@ -155,5 +156,4 @@ return [
             // 'window' => 0,
         ]),
     ],
-
 ];

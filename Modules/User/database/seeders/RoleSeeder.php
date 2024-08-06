@@ -3,18 +3,18 @@
 namespace Modules\User\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\User\Models\Role;
 
-class UserDatabaseSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $this->call([
-            PermissionSeeder::class,
-            RoleSeeder::class,
-            RoleToPermissionsSeeder::class,
+        Role::create([
+            'slug' => 'admin',
+            'label' => 'Administrator'
         ]);
     }
 }

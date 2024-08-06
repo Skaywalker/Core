@@ -1,7 +1,6 @@
 <script setup >
 import {usePage} from "@inertiajs/vue3";
-const alert=usePage().props.flash.alertMessage;
-console.log(alert);
+const alert=usePage().props.flash?.alertMessage;
 </script>
 
 <template>

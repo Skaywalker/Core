@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Admin\Http\Controllers\AuthController;
 use Modules\Website\Http\Controllers\WebsiteController;
 
 /*
@@ -17,6 +18,7 @@ use Modules\Website\Http\Controllers\WebsiteController;
 Route::group([], function () {
     Route::resource('website', WebsiteController::class)->names('website');
 });
+
 Route::get('/lang/{locale?}',function ($locale){
     if (!in_array($locale,config('app.available_languages'))){
         session()->forget('lang');
@@ -28,4 +30,4 @@ Route::get('/lang/{locale?}',function ($locale){
     return redirect()->back();
 })->name('locale');
 
-Route::get('/', [WebsiteController::class,'index'])->name('website-some-page');
+Route::get('/home', [WebsiteController::class,'index'])->name('home');

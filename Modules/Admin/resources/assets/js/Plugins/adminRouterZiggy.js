@@ -1,12 +1,12 @@
 import Router from 'ziggy-js/src/js/Router.js';
 import Route from 'ziggy-js/src/js/Route.js';
-import {AdminRoute} from './adminRoutes.js';
+import {AdminRouter} from './adminRoutes.js';
 export default class adminRouterZiggy extends Router{
 
     constructor(name, params, absolute = true, config) {
         super();
 
-        this._config = config ?? globalThis?.AdminRoute ?? AdminRoute;
+        this._config = config ?? globalThis?.AdminRouter ?? AdminRouter;
         this._config = { ...this._config, absolute };
         if (name) {
             if (!this._config.routes[name]) {

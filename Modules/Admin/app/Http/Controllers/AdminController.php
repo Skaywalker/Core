@@ -16,8 +16,8 @@ class AdminController extends Controller
      */
     public function index()
     {
+        \Auth::user();
         $value = Session::get('lang');
-
         $app=app()->getLocale();
         $lang=lang();
         return Inertia::module('Admin::index', ['value' => $value, 'app' => $app,'lang'=>$lang]);

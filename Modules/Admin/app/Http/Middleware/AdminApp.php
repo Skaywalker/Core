@@ -12,8 +12,8 @@ class AdminApp extends Middleware
     {
         // Ellenőrzi, hogy az útvonal admin-e
         if ($request->is('admin*')) {
-            $handAdminleInertiaRequests = new \Modules\Admin\Http\Middleware\HandleAdminInertiaRequests;
-            return $handAdminleInertiaRequests->handle($request, $next);
+
+            return $next($request);
             // Itt alkalmazza a HandleInertiaRequests logikát
             // Például közvetlenül meghívhatja a HandleInertiaRequests köztes réteget,
             // vagy implementálhatja annak logikáját ebben a blokkban

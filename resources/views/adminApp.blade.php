@@ -21,8 +21,9 @@
 
     @php
     $component= explode('::', $page['component']);
+    //"Modules/$component[0]/$component[1].vue"
     @endphp
-    @vite(['Modules/Admin/resources/assets/js/adminApp.js',"Modules/$component[0]/$component[1].vue"])
+    @vite(['Modules/Admin/resources/assets/js/adminApp.js'])
     @inertiaHead
 </head>
 <body >

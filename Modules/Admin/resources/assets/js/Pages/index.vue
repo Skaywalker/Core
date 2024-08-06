@@ -2,7 +2,7 @@
 import AdminLayout from "@AdminModule/Layouts/admin-layout.vue";
 import {inject,defineProps} from "vue";
 const props=defineProps(['value','app','lang']);
-const trans = inject('translate');
+import {trans} from '@AdminModule/Plugins/Translations.js';
 </script>
 
 <template>

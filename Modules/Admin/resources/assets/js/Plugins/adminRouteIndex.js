@@ -1,5 +1,5 @@
 import adminRouterZiggy from './adminRouterZiggy.js';
-import {AdminRoute} from './adminRoutes.js';
+import {AdminRouter} from './adminRoutes.js';
 import AdminRouterZiggy from "./adminRouterZiggy.js";
 export function route(name, params, absolute, config) {
     const router = new AdminRouterZiggy(name, params, absolute, config);
@@ -26,7 +26,7 @@ export const adminRouter = {
 };
 
 export function useRoute(defaultConfig) {
-    if (!defaultConfig && !globalThis.AdminRoute && typeof AdminRoute === 'undefined') {
+    if (!defaultConfig && !globalThis.AdminRouter && typeof AdminRouter === 'undefined') {
         throw new Error(
             'AdminRoute error: missing configuration. Ensure that a `Ziggy` variable is defined globally or pass a config object into the useRoute hook.',
         );

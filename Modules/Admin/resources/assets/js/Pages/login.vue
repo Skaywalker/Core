@@ -1,25 +1,26 @@
 <script setup>
 import AdminGuestLayout from "@AdminModule/Layouts/admin-guest-layout.vue";
 import ChangeLangComponent from "@AdminModule/Components/ChangeLangComponent.vue";
-import {inject} from "vue";
-import {useForm} from "@inertiajs/vue3";
+import {useForm, usePage} from "@inertiajs/vue3";
 import ThemeChange from "@AdminModule/Components/ThemeChange.vue";
-const trans = inject('translate');
-//import {route} from 'ziggy-js'
+import {trans} from "@AdminModule/Plugins/Translations.js";
 import { route } from '@AdminModule/Plugins/adminRouteIndex.js';
 
 import AlertMessageBox from "@AdminModule/Components/AlertMessageBox.vue";
-
+console.log(usePage().props)
 const form = useForm({
-    email: '',
+  email: '',
     password: '',
     remember: false,
 });
-console.log(route());
 const submit=()=>{
-  form.post(route('adminWeb.login-post'),
+  form.post('/login',
       {
-        onFinish:()=>form.reset('password'),
+        preserveScroll: true,
+        onSuccess: (re) => {
+          console.log(re);
+          form.reset();}
+
       }
   )
 }
@@ -39,7 +40,6 @@ const submit=()=>{
         <h1>{{trans('admin::pages.login-title')}}</h1>
         <ChangeLangComponent />
       </div>
-
       <div class="logo-img"> <img src="https://picsum.photos/id/237/300/300" alt="logo">
       </div>
       <alert-message-box></alert-message-box>

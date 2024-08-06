@@ -12,7 +12,7 @@ class BcmsRouterFile
 
     public function __toString(): string
     {
-        $module=get_class($this->ziggy)===AdminRouter::class?'adminRouter':'websiteRouter';
+        $module=get_class($this->ziggy)===AdminRouter::class?'AdminRouter':'WebsiteRouter';
         return <<<JAVASCRIPT
         const {$module} = {$this->ziggy->toJson()};
         if (typeof window !== 'undefined' && typeof window.{$module} !== 'undefined') {

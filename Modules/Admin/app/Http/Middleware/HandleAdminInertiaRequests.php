@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Reflector;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
 use Inertia\Middleware;
 use Modules\Admin\Class\AdminRouter;
 use ReflectionClass;
@@ -35,7 +36,6 @@ class HandleAdminInertiaRequests extends Middleware
     {
         return parent::version($request);
     }
-
     /**
      * Define the props that are shared by default.
      *
@@ -47,13 +47,12 @@ class HandleAdminInertiaRequests extends Middleware
     {
 
         return [...parent::share($request),
-            'Ziggy' => fn() => [
-                ...(new AdminRouter)->toArray(), [
-                    'location' => $request->url(),
-                ],
-            ],
+
             'flash' => fn() => collect(session()->get('_flash')['new']??[])
                 ->mapWithKeys(fn($value) => [$value => session()->get($value)])
-                ->toArray()];
+                ->toArray(),
+            'user' => fn() => $request->user() ? array_merge($request->user()->toArray(), [
+            ]) : null
+        ];
     }
 }
